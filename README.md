@@ -1,15 +1,18 @@
 # spike-terraform-lambda
-Spike sobre el uso del lenguaje HCL para la creación y gestión de lambdas en aws. En este caso particular se crea una lambda en nodejs activada por un trigger del API Gateway. Tutorial pensado para quienes tienen cero experiencia con Terraform. Los modulos para este laboratorio fueron obtenidos del repo https://github.com/nsriram/lambda-the-terraform-way/
+Spike sobre el uso del lenguaje HCL para la creación y gestión de lambdas en aws. En este caso particular se crea una lambda en nodejs activada por un trigger del API Gateway. Tutorial pensado para quienes tienen cero experiencia con Terraform. Los modulos para este laboratorio fueron obtenidos del repo https://github.com/nsriram/lambda-the-terraform-way/.
+
+![logo célula vikingos](doc/assets/logo_vikingos.jpeg)
+
 
 ## Contenido
 
-1. Objetivos
-2. Introducción
-3. Conceptos
-4. Diseño PoC
-5. Configuración del ambiente de desarrollo
-6. Detalles de implementación
-7. Referencias
+1. [Objetivos](#1-objetivos)
+2. [Introducción](#1-introducción)
+3. [Conceptos](#1-conceptos)
+4. [Diseño PoC](#4-diseño-de-la-poc)
+5. [Configuración del ambiente de desarrollo](#5-configuración-del-ambiente-de-desarrollo)
+6. [Detalles de implementación](#6-detalles-de-implementación)
+7. [Referencias](#7-referencias)
 
 
 
@@ -41,36 +44,46 @@ Spike sobre el uso del lenguaje HCL para la creación y gestión de lambdas en a
 - Diferecias entre API HTTP y API REST
 - Seguridad
 
-## 3.3 Buenas practicas y recomendaciones
-
+### 3.3 Buenas practicas y recomendaciones
 
 
 ## 4. Diseño de la PoC
 
 A continuación se presenta un esquema de la PoC
 
-[!Esquema lambda](doc/assets/esquema_lambda.png)
+
+Diagrama estructura PoC
+
+![Diagrama estructura PoC](doc/assets/diagramas-static.png)
+
+Diagrama comportamiento PoC
+
+![Diagrama comportamiento PoC](doc/assets/diagramas-dynamic.png)
 
 Ejemplo request:
 
 ```json
 {
-
+    "name": "value1"
 }
 ```
 
 Ejemplo response:
 ```json
 {
-
+    "name": "value",
+    "isbn": "xxxxx"
 }
 ```
+
+./gradlew shadowJar
+
 
 ## 5. Configuración del ambiente de desarrollo
 
 - Terraform con tfenv
 - AWS Cli v2
-- Java 11 con jenv
+- JDK Java 11
 - IDE decente
 - Una cuenta de AWS
 
@@ -78,17 +91,6 @@ Ejemplo response:
 
 reutilizar ese cli para el modulo iam de terraform
 
-Terraform
-Now we will run terraform script to create the IAM user.
-
-TF_VAR keybase_id
-Before we can run the main.tf terraform script, we have to configure the keybase id as a TF_VAR. TF_VARs allow values to be passed to terraform variables via environment. The variable declared in main.tf should be prefixed by TF_VAR_ i.e., TF_VAR_keybase_id.
-
-You can provide this value for your id as below, by replacing the key_base_userid field.
-
-```sh
-export TF_VAR_keybase_id=key_base_userid
-```
 
 Terraform Apply
 After setting TF_VAR_keybase_id environment variable, lets run terraform apply.
@@ -97,6 +99,9 @@ After setting TF_VAR_keybase_id environment variable, lets run terraform apply.
 terraform init
 terraform apply --auto-approve  
 ```
+
+## 6. Detalles de implementación
+
 
 ## 7. Referencias:
 
