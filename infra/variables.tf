@@ -8,9 +8,9 @@ variable "runtime" {
 
 variable "output_path" {
   description = "Path to function's deployment package into local filesystem. eg: /path/lambda_function.jar"
-  default = "../code/build/libs/code-0.1-all.jar"
+  default     = "../code/build/libs/code-0.1-all.jar"
 }
 
-variable "aws_region"  {
-    default = "us-east-2"
+variable "aws_region" {
+  default = "us-east-2"
 }

@@ -27,5 +27,5 @@ resource "aws_lambda_permission" "lambda_tf_way_api_gateway_permission" {
   action        = "lambda:InvokeFunction"
   function_name = var.lambda_tf_way_lambda_function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn = "${var.lambda_tf_way_rest_api_execution_arn}/*/GET/"
+  source_arn = "${var.lambda_tf_way_rest_api_execution_arn}/*/POST/"
 }

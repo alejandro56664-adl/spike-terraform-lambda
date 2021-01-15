@@ -69,6 +69,7 @@ Ejemplo request:
 ```
 
 Ejemplo response:
+
 ```json
 {
     "name": "value",
@@ -88,6 +89,31 @@ Ejemplo response:
 - Una cuenta de AWS
 
 - Creación Key desde el portal para el cli
+
+Follow these steps to install the AWS SAM CLI using Homebrew:
+
+brew tap aws/tap
+brew install aws-sam-cli
+
+
+Verifique la instalación
+
+sam --version
+
+You should see output like the following after successful installation of the AWS SAM CLI:
+
+ 
+ SAM CLI, version 1.15.0
+You're now ready to start development.
+
+sam build
+
+echo '{"name": "hola" }' | sam local invoke --event - --debug --profile "$AWS_PROFILE"
+
+aws lambda invoke --function-name helloWorldLambda \
+    --log-type Tail \
+    --payload '{"name":"hola"}' \
+    --profile "$AWS_PROFILE" outputfile.txt
 
 reutilizar ese cli para el modulo iam de terraform
 
@@ -111,3 +137,4 @@ terraform apply --auto-approve
 
 3. [Deploy a Serverless Micronaut function to AWS Lambda Java 11 Runtime](https://guides.micronaut.io/mn-serverless-function-aws-lambda/guide/index.html)
 
+4. [Serverless SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html

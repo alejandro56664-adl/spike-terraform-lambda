@@ -9,6 +9,7 @@ public class BookRequestHandlerTest {
 
     private static BookRequestHandler bookRequestHandler;
 
+
     @BeforeAll
     public static void setupServer() {
         bookRequestHandler = new BookRequestHandler();
