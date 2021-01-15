@@ -77,8 +77,9 @@ Ejemplo response:
 }
 ```
 
+```sh
 ./gradlew shadowJar
-
+```
 
 ## 5. Configuración del ambiente de desarrollo
 
@@ -92,28 +93,36 @@ Ejemplo response:
 
 Follow these steps to install the AWS SAM CLI using Homebrew:
 
+```sh
 brew tap aws/tap
 brew install aws-sam-cli
-
+```
 
 Verifique la instalación
 
+```sh
 sam --version
+```
 
 You should see output like the following after successful installation of the AWS SAM CLI:
 
  
  SAM CLI, version 1.15.0
 You're now ready to start development.
-
+```sh
 sam build
+```
 
+```sh
 echo '{"name": "hola" }' | sam local invoke --event - --debug --profile "$AWS_PROFILE"
+```
 
+```sh
 aws lambda invoke --function-name helloWorldLambda \
     --log-type Tail \
     --payload '{"name":"hola"}' \
     --profile "$AWS_PROFILE" outputfile.txt
+```
 
 reutilizar ese cli para el modulo iam de terraform
 
@@ -137,4 +146,6 @@ terraform apply --auto-approve
 
 3. [Deploy a Serverless Micronaut function to AWS Lambda Java 11 Runtime](https://guides.micronaut.io/mn-serverless-function-aws-lambda/guide/index.html)
 
-4. [Serverless SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html
+4. [Serverless SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html)
+
+5. [Creating your first AWS Java web application](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javav2/usecases/creating_first_project)
