@@ -1,14 +1,14 @@
 # spike-terraform-lambda
-Spike sobre el uso del lenguaje HCL para la creación y gestión de lambdas en aws. En este caso particular se crea una lambda en nodejs activada por un trigger del API Gateway. Tutorial pensado para quienes tienen cero experiencia con Terraform. Los modulos para este laboratorio fueron obtenidos del repo https://github.com/nsriram/lambda-the-terraform-way/.
+
+Trabajo realizado para la célula "Vikingos":
 
 ![logo célula vikingos](doc/assets/logo_vikingos.jpeg)
-
 
 ## Contenido
 
 1. [Objetivos](#1-objetivos)
-2. [Introducción](#1-introducción)
-3. [Conceptos](#1-conceptos)
+2. [Introducción](#2-introducción)
+3. [Conceptos](#3-conceptos)
 4. [Diseño PoC](#4-diseño-de-la-poc)
 5. [Configuración del ambiente de desarrollo](#5-configuración-del-ambiente-de-desarrollo)
 6. [Detalles de implementación](#6-detalles-de-implementación)
@@ -25,7 +25,7 @@ Spike sobre el uso del lenguaje HCL para la creación y gestión de lambdas en a
 
 ## 2. Introducción
 
-
+Spike sobre el uso del lenguaje HCL para la creación y gestión de lambdas en aws. En este caso particular se crea una lambda en nodejs activada por un trigger del API Gateway. Tutorial pensado para quienes tienen cero experiencia con Terraform. Los modulos para este laboratorio fueron obtenidos del repo https://github.com/nsriram/lambda-the-terraform-way/.
 
 ## 3. Conceptos
 
@@ -72,7 +72,7 @@ Ejemplo response:
 
 ```json
 {
-    "name": "value",
+    "name": "value1",
     "isbn": "xxxxx"
 }
 ```
@@ -104,17 +104,18 @@ Verifique la instalación
 sam --version
 ```
 
-You should see output like the following after successful installation of the AWS SAM CLI:
+Debería ver el siguiente mensaje del  AWS SAM CLI:
 
- 
  SAM CLI, version 1.15.0
-You're now ready to start development.
+
+Para construir el entorno de pruebas local:
+
 ```sh
 sam build
 ```
 
 ```sh
-echo '{"name": "hola" }' | sam local invoke --event - --debug --profile "$AWS_PROFILE"
+echo '{"name": "value1" }' | sam local invoke --event - --debug --profile "$AWS_PROFILE"
 ```
 
 ```sh
@@ -124,11 +125,6 @@ aws lambda invoke --function-name helloWorldLambda \
     --profile "$AWS_PROFILE" outputfile.txt
 ```
 
-reutilizar ese cli para el modulo iam de terraform
-
-
-Terraform Apply
-After setting TF_VAR_keybase_id environment variable, lets run terraform apply.
 
 ```sh
 terraform init
