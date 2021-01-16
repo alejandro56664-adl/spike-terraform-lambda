@@ -31,15 +31,33 @@ Spike sobre el uso del lenguaje HCL para la creación y gestión de lambdas en a
 
 ### 3.1 Infraestructura como código
 - Introducción a HCL
+
+Diagrama esquematico funcionamiento de Terraform:
+![Diagrama esquematico modelo terraform](doc/assets/diagramas-terraform%20model.png)
+
+
 - modulos
 - provedores
 - recursos
+
+
 
 ### 3.2 AWS Lambda con Micronaut
 - Runtime (Java 11, Coretto)
 - IAM (https://github.com/nsriram/lambda-the-terraform-way/blob/master/docs/04-iam-account-setup.md)
 - Layers
+
+Diagrama esquematico layers
+
+![Diagrama esquematico layers](doc/assets/diagramas-lambda%20layers.png)
+
 - Desencadenadores 
+
+Diagrama esquematico modelo lambda
+
+![Diagrama esquematico modelo lambda](doc/assets/diagramas-lambda%20model.png)
+
+
 - API Gateway
 - Diferecias entre API HTTP y API REST
 - Seguridad
@@ -50,7 +68,6 @@ Spike sobre el uso del lenguaje HCL para la creación y gestión de lambdas en a
 ## 4. Diseño de la PoC
 
 A continuación se presenta un esquema de la PoC
-
 
 Diagrama estructura PoC
 
@@ -128,11 +145,14 @@ aws lambda invoke --function-name helloWorldLambda \
 
 ```sh
 terraform init
+terraform plan
 terraform apply --auto-approve  
 ```
 
 ## 6. Detalles de implementación
 
+Diagrama de despliegue/Estructura proyecto infra:
+![Diagrama de despliegue PoC](doc/assets/diagramas-deploy.png)
 
 ## 7. Referencias:
 
