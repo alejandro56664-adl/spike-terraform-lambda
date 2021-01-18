@@ -43,8 +43,12 @@ Diagrama esquematico funcionamiento de Terraform:
 
 
 ### 3.2 AWS Lambda con Micronaut
+
+#### 3.2.1 Lambda
+
 - Runtime (Java 11, Coretto)
 - IAM (https://github.com/nsriram/lambda-the-terraform-way/blob/master/docs/04-iam-account-setup.md)
+
 - Layers
 
 Diagrama esquematico layers
@@ -58,12 +62,23 @@ Diagrama esquematico modelo lambda
 ![Diagrama esquematico modelo lambda](doc/assets/diagramas-lambda%20model.png)
 
 
-- API Gateway
-- Diferecias entre API HTTP y API REST
-- Seguridad
+#### 3.2.2 API Gateway
+
+_API REST_
+
+Una colección de métodos y recursos HTTP que se integran con puntos de enlace HTTP back-end, funciones Lambda u otros servicios de AWS. Puede implementar esta colección en una o más etapas. Normalmente, los recursos de la API se organizan en un árbol de recursos según la lógica de la aplicación. Cada recurso de API puede exponer uno o más métodos de API que tienen verbos HTTP únicos compatibles con API Gateway.
+
+_API HTTP_
+Una colección de rutas y métodos que están integrados con puntos de enlace HTTP backend o funciones Lambda. Puede implementar esta colección en una o más etapas. Cada ruta puede exponer uno o más métodos API que tienen verbos HTTP únicos compatibles con API Gateway.
+
+_WebSocket API_
+Una colección de rutas de WebSocket y claves de ruta que están integradas con puntos de enlace HTTP backend, funciones Lambda u otros servicios de AWS. Puede implementar esta colección en una o más etapas. Los métodos API se invocan a través de conexiones WebSocket frontend que puede asociar con un nombre de dominio personalizado registrado.
+
+Para mayor información sobre las diferencias puede ir a https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html
 
 ### 3.3 Buenas practicas y recomendaciones
 
+TODO
 
 ## 4. Diseño de la PoC
 
@@ -94,22 +109,32 @@ Ejemplo response:
 }
 ```
 
+Para generar el fatjar que se subirá al lambda utilice la siguiente instrucción:
+
 ```sh
 ./gradlew shadowJar
 ```
 
 ## 5. Configuración del ambiente de desarrollo
 
-- Terraform con tfenv
-- AWS Cli v2
-- JDK Java 11
+
+
 - IDE decente
 - Una cuenta de AWS
+- JDK Java 11, instrucciones con [jenv](https://github.com/jenv/jenv)
+- Terraform con [tfenv](https://github.com/tfutils/tfenv)
+- Tener instalado AWS Cli v2, [instrucciones](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
 
-- Creación Key desde el portal para el cli
+Para realizar el ciclo de Terraform use los siguientes comandos:
 
-Follow these steps to install the AWS SAM CLI using Homebrew:
+```sh
+terraform init
+terraform plan
+terraform apply --auto-approve  
+```
+![Screenshoot prueba Terraform Apply](doc/assets/screenshot-resultado-terraform-apply.png)
 
+Pasos para instalar el AWS SAM CLI:
 ```sh
 brew tap aws/tap
 brew install aws-sam-cli
@@ -131,10 +156,14 @@ Para construir el entorno de pruebas local:
 sam build
 ```
 
+Para realizar las pruebas locales
 ```sh
 echo '{"name": "value1" }' | sam local invoke --event - --debug --profile "$AWS_PROFILE"
 ```
+![Screenshoot prueba SAM](doc/assets/screenshot-resultado-test-sam.png)
 
+
+Para realizar las pruebas remoto, solo lambda, sin pasar por el api gateway
 ```sh
 aws lambda invoke --function-name helloWorldLambda \
     --log-type Tail \
@@ -142,12 +171,14 @@ aws lambda invoke --function-name helloWorldLambda \
     --profile "$AWS_PROFILE" outputfile.txt
 ```
 
+Para realizar las pruebas a través del api gateway (requiere tener instalado [HTTPie](https://httpie.io/docs)):
 
 ```sh
-terraform init
-terraform plan
-terraform apply --auto-approve  
+http POST https://4zgo80psth.execute-api.us-east-2.amazonaws.com/prod name=value
 ```
+![Screenshoot prueba API Gateway](doc/assets/screenshot-resultado-api-gateway.png)
+
+
 
 ## 6. Detalles de implementación
 
@@ -165,3 +196,5 @@ Diagrama de despliegue/Estructura proyecto infra:
 4. [Serverless SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-using-invoke.html)
 
 5. [Creating your first AWS Java web application](https://github.com/awsdocs/aws-doc-sdk-examples/tree/master/javav2/usecases/creating_first_project)
+
+7. [API Gateway: HTTP API vs REST](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html)
